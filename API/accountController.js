@@ -1,5 +1,4 @@
-
-import Account from './accountModel';
+import { Account } from './accountModel.js';
 import mongoose from 'mongoose';
 
 // get all accounts

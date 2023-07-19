@@ -1,4 +1,4 @@
-import Event from './eventModel';
+import { Event } from './eventModel.js';
 import mongoose from 'mongoose';
 
 // get all events
