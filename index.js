@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import accountRoutes from './API/routes/accounts.js';
 import cors from 'cors';
 import eventRoutes from './API/events.js';
+import bodyParser from 'body-parser';
 
 console.log("in server");
 
@@ -12,6 +13,7 @@ console.log("in server");
 const app = express();
 app.use(cors());
 app.options('*', cors());
+app.use(bodyParser.json());
 
 // middleware
 app.use(express.json());
