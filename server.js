@@ -1,9 +1,9 @@
 import dotenv from 'dotenv';
-const express = require('express');
-const mongoose = require('mongoose');
-const accountRoutes = require('./API/routes/accounts');
-const cors = require('cors');
-const eventRoutes = require('./API/events');
+import express from 'express';
+import mongoose from 'mongoose';
+import accountRoutes from './API/routes/accounts';
+import cors from 'cors';
+import eventRoutes from './API/events';
 
 console.log("in server");
 
