@@ -8,21 +8,32 @@ const getAccounts = async (req, res) => {
     res.status(200).json(account);
 }
 
-// get a single account
-const getAccount = async (req, res) => {
-    const {id} = req.params;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'Account does not exist'});
+//login
+const login = async (req, res) => {
+    try
+    {
+        const {username, password} = req.body;
+        const user = await accountModel.findOne({username});
+        if(!user) return res.status(400).json({error: "Username does not exist!"});
+        if(password === user.password)
+        {
+            return res.status(200).json({user});
+        }
+        else{
+            return res.status(401).json({error: "The password is incorrect!"});
+        }
+    }catch(error){
+        return res.status(500).json({error: "Internal error"});
     }
+    // if (!mongoose.Types.ObjectId.isValid(id)) {
+    //     return res.status(404).json({error: 'Account does not exist'});
+    // }
 
-    const account = await Account.findById(id);
+    // const account = await Account.findById(id);
 
-    if (!account) {
-        return res.status(404).json({error: 'Account does not exist'});
-    }
-
-    res.status(200).json(account);
+    // if (!account) {
+    //     return res.status(404).json({error: 'Account does not exist'});
+    // }
 }
 
 // create a new account
