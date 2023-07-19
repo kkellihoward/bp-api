@@ -16,6 +16,9 @@ app.options('*', cors());
 // middleware
 app.use(express.json());
 
+app.get('/', (req, res) => {
+    res.end('it works!');
+});
 
 app.use((req, res, next) => 
 {
