@@ -1,9 +1,9 @@
 import dotenv from 'dotenv';
 const express = require('express');
 const mongoose = require('mongoose');
-const accountRoutes = require('./routes/accounts');
+const accountRoutes = require('./API/routes/accounts');
 const cors = require('cors');
-const eventRoutes = require('./events');
+const eventRoutes = require('./API/events');
 
 console.log("in server");
 
