@@ -4,20 +4,16 @@ const Schema = mongoose.Schema;
 
 const accountSchema = new Schema({
     username: {
-        type: String,
-        required: true
+        type: String
     },
     password: {
-        type: String,
-        required: true
+        type: String
     },
     phone: {
-        type: String,
-        required: true
+        type: String
     },
     email: {
-        type: String,
-        required: true
+        type: String
     },
     hosted_event_ids: [{
         type: String,
