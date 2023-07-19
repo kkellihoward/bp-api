@@ -3,7 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { accountRoutes } from './API/routes/accounts.js';
 import cors from 'cors';
-import eventRoutes from './API/events';
+import { eventRoutes } from './API/events.js';
 
 console.log("in server");
 
