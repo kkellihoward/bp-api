@@ -2,14 +2,14 @@ import Account from './accountModel.js';
 import mongoose from 'mongoose';
 
 // get all accounts
-const getAccounts = async (req, res) => {
+export const getAccounts = async (req, res) => {
     const account = await Account.find({}).sort({createdAt: -1});
 
     res.status(200).json(account);
 }
 
 // get a single account
-const getAccount = async (req, res) => {
+export const login = async (req, res) => {
     const {id} = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -26,7 +26,7 @@ const getAccount = async (req, res) => {
 }
 
 // create a new account
-const createAccount = async (req, res) => {
+export const createAccount = async (req, res) => {
     const {username, password} = req.body;
 
     // add doc to db
@@ -39,7 +39,7 @@ const createAccount = async (req, res) => {
 };
 
 // delete an account
-const deleteAccount = async (req, res) =>{
+export const deleteAccount = async (req, res) =>{
     const {id} = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -56,7 +56,7 @@ const deleteAccount = async (req, res) =>{
 }
 
 // update an account
-const updateAccount = async (req, res) => {
+export const updateAccount = async (req, res) => {
     const {id} = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -73,11 +73,3 @@ const updateAccount = async (req, res) => {
 
     res.status(200).json(account);
 }
-
-module.exports = {
-    getAccounts,
-    getAccount,
-    createAccount,
-    deleteAccount,
-    updateAccount
-};

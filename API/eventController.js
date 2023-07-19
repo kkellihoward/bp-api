@@ -1,15 +1,15 @@
-import { Event } from './eventModel.js';
+import Event from './eventModel.js';
 import mongoose from 'mongoose';
 
 // get all events
-const getEvents = async (req, res) => {
+export const getEvents = async (req, res) => {
     const event = await Event.find({}).sort({createdAt: -1});
 
     res.status(200).json(event);
 }
 
 // get a single event
-const getEvent = async (req, res) => {
+export const getEvent = async (req, res) => {
     const {id} = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -26,7 +26,7 @@ const getEvent = async (req, res) => {
 }
 
 // create a new event
-const createEvent = async (req, res) => {
+export const createEvent = async (req, res) => {
     const {title, host_id, invitee_ids, date} = req.body;
 
     const temp = await Event.findOne({title: title});
@@ -49,7 +49,7 @@ const createEvent = async (req, res) => {
 };
 
 // delete an event
-const deleteEvent = async (req, res) =>{
+export const deleteEvent = async (req, res) =>{
     const {id} = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -67,7 +67,7 @@ const deleteEvent = async (req, res) =>{
 
 // update an event
 // cannot be used to add invitees. this must be done via js "push" function
-const updateEvent = async (req, res) => {
+export const updateEvent = async (req, res) => {
     const {id} = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -84,11 +84,3 @@ const updateEvent = async (req, res) => {
 
     res.status(200).json(event);
 }
-
-module.exports = {
-    getEvent,
-    getEvents,
-    createEvent,
-    deleteEvent,
-    updateEvent
-};

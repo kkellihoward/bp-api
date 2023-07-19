@@ -7,21 +7,21 @@ import {
     updateAccount
 } from '../accountController.js';
 
-const router = express.Router();
+const accountRoutes = express.Router();
 
 // GET all accounts
-router.get('/', getAccounts);
+accountRoutes.get('/', getAccounts);
 
 // GET a single account
-router.get('/login', login);
+accountRoutes.get('/login', login);
 
 // POST a new account
-router.post('/signup', createAccount);
+accountRoutes.post('/signup', createAccount);
 
 // DELETE an account
-router.delete('/:id', deleteAccount);
+accountRoutes.delete('/:id', deleteAccount);
 
 // UPDATE an account
-router.patch('/:id', updateAccount);
+accountRoutes.patch('/:id', updateAccount);
 
-module.exports = router;
+export default accountRoutes;
