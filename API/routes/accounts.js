@@ -13,7 +13,7 @@ const accountRoutes = express.Router();
 accountRoutes.get('/getaccounts', getAccounts);
 
 // GET a single account
-accountRoutes.post('/login', login);
+accountRoutes.get('/login', login);
 
 // POST a new account
 accountRoutes.post('/signup', createAccount);
