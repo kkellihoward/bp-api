@@ -10,19 +10,14 @@ export const getAccounts = async (req, res) => {
 
 // get a single account
 export const login = async (req, res) => {
-    const {id} = req.params;
+    const {username, password} = req.body;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'Account does not exist'});
-    }
+    const user = await Account.findOne({username});
 
-    const account = await Account.findById(id);
+    if(!user) return res.status(400).json({error: 'Account does not exist'});
+    if(password !== res.password) return res.status(401).json({error: 'Incorrect password'});
 
-    if (!account) {
-        return res.status(404).json({error: 'Account does not exist'});
-    }
-
-    res.status(200).json(account);
+    return res.status(200).json({message: 'You have been successfully logged in!'});
 }
 
 // create a new account
