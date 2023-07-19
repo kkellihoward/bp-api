@@ -10,21 +10,19 @@ export const getAccounts = async (req, res) => {
 
 // get a single account
 export const login = async (req, res) => {
-    const {username, password} = req.body;
+    const { username, password } = req.body;
 
-    const user = await Account.findOne({username});
+    const user = await Account.findOne({ username });
 
-    if(user)
-    {
-        if(password === Account.password){
-            return res.status(200).json({message: 'You have been successfully logged in!'});
+    if (user) {
+        if (password === user.password) {
+            return res.status(200).json({ message: 'You have been successfully logged in!' });
+        } else if (password !== user.password) {
+            return res.status(401).json({ error: 'Incorrect password' });
         }
-        else{
-            if(password !== res.password) return res.status(401).json({error: 'Incorrect password'});
-        }
-    }else{
-        return res.status(400).json({error: 'Account does not exist'});
-    }// return res.status(200).json({message: 'You have been successfully logged in!'});
+    } else {
+        return res.status(400).json({ error: 'Account does not exist' });
+    }
 };
 
 // create a new account
