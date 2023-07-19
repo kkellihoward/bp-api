@@ -7,7 +7,6 @@ const eventRoutes = require('./events');
 
 // starts up express app
 const app = express();
-app.use(cors());
 
 // middleware
 app.use(express.json());
