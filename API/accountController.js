@@ -1,4 +1,4 @@
-const Account = require('../models/accountModel');
+const Account = require('./accountModel');
 const mongoose = require('mongoose');
 
 // get all accounts
@@ -8,53 +8,33 @@ const getAccounts = async (req, res) => {
     res.status(200).json(account);
 }
 
-//login
-const login = async (req, res) => {
-    try
-    {
-        const {username, password} = req.body;
-        const user = await accountModel.findOne({username});
-        if(!user) return res.status(400).json({error: "Username does not exist!"});
-        if(password === user.password)
-        {
-            return res.status(200).json({user});
-        }
-        else{
-            return res.status(401).json({error: "The password is incorrect!"});
-        }
-    }catch(error){
-        return res.status(500).json({error: "Internal error"});
+// get a single account
+const getAccount = async (req, res) => {
+    const {id} = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'Account does not exist'});
     }
-    // if (!mongoose.Types.ObjectId.isValid(id)) {
-    //     return res.status(404).json({error: 'Account does not exist'});
-    // }
 
-    // const account = await Account.findById(id);
+    const account = await Account.findById(id);
 
-    // if (!account) {
-    //     return res.status(404).json({error: 'Account does not exist'});
-    // }
+    if (!account) {
+        return res.status(404).json({error: 'Account does not exist'});
+    }
+
+    res.status(200).json(account);
 }
 
 // create a new account
 const createAccount = async (req, res) => {
-    const {username, password, phone, email} = req.body;
+    const {username, password} = req.body;
 
-    const temp = await Account.findOne({username: username});
-
-    if (temp)
-    {
-        res.status(400).json({error: "Account already exists"});
-    }
-    else
-    {
-        // add doc to db
-        try {
-            const account = await Account.create({username, password, phone, email});
-            res.status(200).json(account);
-        } catch (error) {
-            res.status(400).json({error: "Account unable to be created"});
-        }
+    // add doc to db
+    try {
+        const account = await Account.create({username, password});
+        res.status(200).json(account);
+    } catch (error) {
+        res.status(400).json({error: error.message});
     }
 };
 
