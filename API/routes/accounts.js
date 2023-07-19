@@ -10,7 +10,7 @@ import {
 const accountRoutes = express.Router();
 
 // GET all accounts
-accountRoutes.get('/', getAccounts);
+accountRoutes.get('/getaccounts', getAccounts);
 
 // GET a single account
 accountRoutes.post('/login', login);
