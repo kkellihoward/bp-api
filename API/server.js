@@ -5,6 +5,7 @@ const accountRoutes = require('./routes/accounts');
 const cors = require('cors');
 const eventRoutes = require('./events');
 
+console.log("in the server");
 
 // starts up express app
 const app = express();
