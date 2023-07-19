@@ -14,11 +14,18 @@ export const login = async (req, res) => {
 
     const user = await Account.findOne({username});
 
-    if(!user) return res.status(400).json({error: 'Account does not exist'});
-    if(password !== res.password) return res.status(401).json({error: 'Incorrect password'});
-
-    return res.status(200).json({message: 'You have been successfully logged in!'});
-}
+    if(user)
+    {
+        if(password === Account.password){
+            return res.status(200).json({message: 'You have been successfully logged in!'});
+        }
+        else{
+            if(password !== res.password) return res.status(401).json({error: 'Incorrect password'});
+        }
+    }else{
+        return res.status(400).json({error: 'Account does not exist'});
+    }// return res.status(200).json({message: 'You have been successfully logged in!'});
+};
 
 // create a new account
 export const createAccount = async (req, res) => {
