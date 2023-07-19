@@ -11,6 +11,7 @@ console.log("in server");
 // starts up express app
 const app = express();
 app.use(cors());
+app.options('*', cors());
 
 // middleware
 app.use(express.json());
