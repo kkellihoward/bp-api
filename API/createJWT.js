@@ -1,5 +1,7 @@
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 exports.createToken = function(id, usr, pwd){
     return _createToken(id, usr, pwd);

@@ -1,5 +1,5 @@
-const Event = require('./eventModel');
-const mongoose = require('mongoose');
+import Event from './eventModel';
+import mongoose from 'mongoose';
 
 // get all events
 const getEvents = async (req, res) => {

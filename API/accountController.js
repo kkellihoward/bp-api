@@ -1,5 +1,6 @@
-const Account = require('./accountModel');
-const mongoose = require('mongoose');
+
+import Account from './accountModel';
+import mongoose from 'mongoose';
 
 // get all accounts
 const getAccounts = async (req, res) => {

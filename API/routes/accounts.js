@@ -1,11 +1,11 @@
-const express = require('express');
-const {
+import express from 'express';
+import {
     createAccount,
     getAccounts,
     login,
     deleteAccount,
     updateAccount
-} = require('./accountController');
+} from'./accountController';
 
 const router = express.Router();
 
