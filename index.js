@@ -22,7 +22,7 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 // });
 
 app.get('/', (req, res) => {
-    console.log('Received request:', req.method, req.url, req.params)
+    console.log('Received request:', req.method, req.url, req.query)
     res.end('it works!');
 });
 
