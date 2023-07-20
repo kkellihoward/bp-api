@@ -11,14 +11,12 @@ export const getAccounts = async (req, res) => {
 // get a single account
 export const login = async (req, res) => {
     const { username, password } = req.body;
-    console.log(username);
-    console.log(password);
     const user = await Account.findOne({ username });
 
     if (user) {
         if (password === user.password) {
             console.log(user.password + "and" + password);
-            return res.status(200).json({ message: 'You have been successfully lo in!' });
+            return res.status(200).json(user,{ message: 'You have been successfully lo in!' });
         } else if (password !== user.password) {
             return res.status(401).json({ error: 'Incorrect password' });
         }
