@@ -24,7 +24,7 @@ export const login = async (req, res) => {
     
     // return res.status(300).json({ error: parameters['username'] });
     
-    const user = await Account.findOne(parameters['username']);
+    const user = await Account.findOne({ username: parameters['username'] });
 
     if (user) {
         if (parameters['password'] === user.password) {
