@@ -10,9 +10,9 @@ export const getAccounts = async (req, res) => {
 
 // get a single account
 export const login = async (req, res) => {
-    const { username, password } = req.body;
-    console.log("Received username:", username); // Add this log to check the received data
-    console.log("Received password:", password);
+    // const { username, password } = req.body;
+    // console.log("Received username:", username); // Add this log to check the received data
+    // console.log("Received password:", password);
 
     const urlParams = new URLSearchParams(req.url.split('?')[1]);
     const parameters = {};
@@ -22,15 +22,15 @@ export const login = async (req, res) => {
         console.log("value: ", String(value))
     }
     
-    return res.status(300).json({ error: parameters['username'] });
+    // return res.status(300).json({ error: parameters['username'] });
     
-    const user = await Account.findOne({ username });
+    const user = await Account.findOne({ parameters['username'] });
 
     if (user) {
-        if (password === user.password) {
+        if (parameters['password'] === user.password) {
             console.log(user.password + "and" + password);
             return res.status(200).json({ message: 'You have been successfully logged in! ' + String(user.username) + ' ' + String(user.password) + ' ' + String(username) + ' ' + String(password) + ' ' + req.body });
-        } else if (password !== user.password) {
+        } else if (parameters['password'] !== user.password) {
             return res.status(401).json({ error: 'Incorrect password' });
         }
     } else {
