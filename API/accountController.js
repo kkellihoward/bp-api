@@ -11,6 +11,8 @@ export const getAccounts = async (req, res) => {
 // get a single account
 export const login = async (req, res) => {
     const { username, password } = req.body;
+    console.log("Received username:", username); // Add this log to check the received data
+      console.log("Received password:", password);
     const user = await Account.findOne({ username });
 
     if (user) {
