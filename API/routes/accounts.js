@@ -6,6 +6,9 @@ import {
     deleteAccount,
     updateAccount
 } from '../accountController.js';
+import bodyParser from 'body-parser';
+
+const jsonParser = bodyParser.json(); 
 
 const accountRoutes = express.Router();
 
@@ -13,7 +16,7 @@ const accountRoutes = express.Router();
 accountRoutes.get('/getaccounts', getAccounts);
 
 // GET a single account
-accountRoutes.post('/login', login);
+accountRoutes.post('/login', jsonParser, login);
 
 // POST a new account
 accountRoutes.post('/signup', createAccount);
