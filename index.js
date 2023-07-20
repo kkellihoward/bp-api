@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
     res.end('it works!');
 });
 
-app.use((req, res, next)) => {
+app.use((req, res, next) => {
     console.log('Received request:', req.method, req.url, req.params)
 });
 
