@@ -13,7 +13,7 @@ console.log("in server");
 const app = express();
 app.use(cors());
 app.options('*', cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
 // middleware
 app.use(express.json());
@@ -22,19 +22,19 @@ app.get('/', (req, res) => {
     res.end('it works!');
 });
 
-app.use((req, res, next) => 
-{
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.setHeader(
-	'Access-Control-Allow-Headers',
-	'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-	);
-	res.setHeader(
-	'Access-Control-Allow-Methods',
-	'GET, POST, PATCH, DELETE, OPTIONS'
-	);
-	next();
-});
+// app.use((req, res, next) => 
+// {
+// 	res.setHeader('Access-Control-Allow-Origin', '*');
+// 	res.setHeader(
+// 	'Access-Control-Allow-Headers',
+// 	'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+// 	);
+// 	res.setHeader(
+// 	'Access-Control-Allow-Methods',
+// 	'GET, POST, PATCH, DELETE, OPTIONS'
+// 	);
+// 	next();
+// });
 
 // routes
 app.use('/accounts', accountRoutes);
