@@ -18,7 +18,8 @@ app.use(cors());
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
+    console.log('Received request:', req.method, req.url, req.params)
     res.end('it works!');
 });
 
