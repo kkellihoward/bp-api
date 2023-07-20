@@ -22,6 +22,8 @@ export const login = async (req, res) => {
         console.log("value: ", String(value))
     }
     
+    return res.status(300).json({ error: parameters });
+    
     const user = await Account.findOne({ username });
 
     if (user) {
