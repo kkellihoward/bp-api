@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 });
 
 app.use((req, res, next) => {
-    console.log('Received request:', req.method, req.url, req.params)
+    console.log('Received request:', req.method, req.url, req.params.username)
 });
 
 // app.use((req, res, next) => 
