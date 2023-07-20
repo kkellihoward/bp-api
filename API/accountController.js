@@ -11,7 +11,8 @@ export const getAccounts = async (req, res) => {
 // get a single account
 export const login = async (req, res) => {
     const { username, password } = req.body;
-
+    console.log(username);
+    console.log(password);
     const user = await Account.findOne({ username });
 
     if (user) {
