@@ -6,11 +6,6 @@ import {
     deleteAccount,
     updateAccount
 } from '../accountController.js';
-import bodyParser from 'body-parser';
-import Account from '../accountModel.js';
-
-const jsonParser = bodyParser.json(); 
-
 const accountRoutes = express.Router();
 
 // GET all accounts
