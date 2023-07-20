@@ -24,7 +24,8 @@ export const login = async (req, res) => {
             return res.status(401).json({ error: 'Incorrect password' });
         }
     } else {
-        return res.status(400).json({ error: 'Account does not exist' + ' ' + String(username) + ' ' + String(password) });
+        return res.status(400).json({ error: String(JSON.parse(req.body)) });
+        // return res.status(400).json({ error: 'Account does not exist' + ' ' + String(username) + ' ' + String(password) });
     }
 };
 
