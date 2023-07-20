@@ -29,13 +29,13 @@ export const login = async (req, res) => {
     if (user) {
         if (parameters['password'] === user.password) {
             console.log(user.password + "and" + password);
-            return res.status(200).json({ message: 'You have been successfully logged in! ' + String(user.username) + ' ' + String(user.password) + ' ' + String(username) + ' ' + String(password) + ' ' + req.body });
+            return res.status(200).json({ message: 'You have been successfully logged in!});
         } else if (parameters['password'] !== user.password) {
             return res.status(401).json({ error: 'Incorrect password' });
         }
     } else {
         // return res.status(400).json({ error: String(JSON.parse(req.body)) });
-        return res.status(400).json({ error: 'Account does not exist' + ' ' + String(username) + ' ' + String(password) });
+        return res.status(400).json({ error: 'Account does not exist'});
     }
 };
 
@@ -43,9 +43,17 @@ export const login = async (req, res) => {
 export const createAccount = async (req, res) => {
     const {username, password} = req.body;
 
+    const urlParams = new URLSearchParams(req.url.split('?')[1]);
+    const parameters = {};
+
+    for (const [key, value] of urlParams) {
+        parameters[key] = value;
+        console.log("value: ", String(value))
+    }
+
     // add doc to db
     try {
-        const account = await Account.create({username, password});
+        const account = await Account.create({username: parameters['username'], password: parameters['password'], email: parameters['email'], phone: parameters['phone']});
         res.status(200).json(account);
     } catch (error) {
         res.status(400).json({error: error.message});
