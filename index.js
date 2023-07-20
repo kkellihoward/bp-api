@@ -12,11 +12,11 @@ console.log("in server");
 // starts up express app
 const app = express();
 app.use(cors());
-app.options('*', cors());
+// app.options('*', cors());
 
 // middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "30mb", extended: true }));
+app.use(express.urlencoded({ limit: "30mb", extended: true }));
 
 app.get('/', (req, res) => {
     res.end('it works!');
