@@ -28,7 +28,7 @@ export const login = async (req, res) => {
 
     if (user) {
         if (parameters['password'] === user.password) {
-            console.log(user.password + "and" + password);
+            // console.log(user.password + "and" + password);
             return res.status(200).json({ message: 'You have been successfully logged in!' });
         } else if (parameters['password'] !== user.password) {
             return res.status(401).json({ error: 'Incorrect password' });
