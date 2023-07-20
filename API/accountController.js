@@ -13,6 +13,7 @@ export const login = async (req, res) => {
     const { username, password } = req.body;
     console.log("Received username:", username); // Add this log to check the received data
     console.log("Received password:", password);
+    console.log(req.body)
     
     const user = await Account.findOne({ username });
 
@@ -24,8 +25,8 @@ export const login = async (req, res) => {
             return res.status(401).json({ error: 'Incorrect password' });
         }
     } else {
-        return res.status(400).json({ error: String(JSON.parse(req.body)) });
-        // return res.status(400).json({ error: 'Account does not exist' + ' ' + String(username) + ' ' + String(password) });
+        // return res.status(400).json({ error: String(JSON.parse(req.body)) });
+        return res.status(400).json({ error: 'Account does not exist' + ' ' + String(username) + ' ' + String(password) });
     }
 };
 
