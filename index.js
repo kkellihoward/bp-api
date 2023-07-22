@@ -3,7 +3,6 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import userRoutes from './server/routes/users.js';
-const path = require('path');
 
 const app = express();
 
