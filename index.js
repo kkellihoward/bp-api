@@ -5,11 +5,18 @@ import mongoose from 'mongoose';
 import userRoutes from './server/routes/users.js';
 
 const app = express();
-
-app.use(express.json({ limit: "30mb", extended: true }));
-app.use(express.urlencoded({ limit: "30mb", extended: true }));
-
 app.use(cors());
+
+// parse requests of content-type - application/json
+app.use(express.json());
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+// app.use('/user/signin', (req, res) => {
+// 	const { email, password } = req.body;
+// 	res.status(200).send({message: "I recieved an API call " + email + ' ' + password})
+// });
 
 app.get('/', (req, res) => {
 	res.send('Yay');
@@ -19,7 +26,7 @@ app.use('/user', userRoutes);
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true, dbName : "test"})
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
 	.then(() => {
 		// listen for requests
 		app.listen(process.env.PORT, () => {
