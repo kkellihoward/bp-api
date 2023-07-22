@@ -14,41 +14,35 @@ export const signup = async (req, res) => {
 
 	try {
 
-		const { email, password } = req.body;
-
-		    // add doc to db
-		        const user = await UserModal.create({ email, password });
-		        res.status(200).json(user);
-
-		// return res.status(200).json({ message: "Email: " + email + ", password: " + password});
+		const { email, password, nickname } = req.body;
 		
-		// const user = await UserModal.findOne({ email });
-		// if (user) return res.status(400).json({ message: "Email already belongs to an existing user." });
+		const user = await UserModal.findOne({ email });
+		if (user) return res.status(400).json({ message: "Email already belongs to an existing user." });
 
-		// // const hashedPassword = await bcrypt.hash(password, 11);
-		// const newUser = await UserModal.create({ email, password });
-		// if (!newUser) return res.status(500).json({ message: "User could not be added to database." });
+		const hashedPassword = await bcrypt.hash(password, 11);
+		const newUser = await UserModal.create({ email, password: hashedPassword, nickname });
+		if (!newUser) return res.status(500).json({ message: "User could not be added to database." });
 
-		// const verificationToken = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "2h" });
-		// const verificationUrl = `${process.env.BASE_URL}/user/verify-email/${verificationToken}`;
+		const verificationToken = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "2h" });
+		const verificationUrl = `${process.env.BASE_URL}/user/verify-email/${verificationToken}`;
 
-		// const transporter = await getTransporter();
-		// if (!transporter) return res.status(500).json({ message: "Could not create email transporter." });
-		// const mailOptions = {
+		const transporter = await getTransporter();
+		if (!transporter) return res.status(500).json({ message: "Could not create email transporter." });
+		const mailOptions = {
 
-		// 	from: "Chordeographer <chordeographer.official@gmail.com>",
-		// 	to: email,
-		// 	subject: "Verify your email.",
-		// 	text: `Verify your email: ${verificationUrl}`,
-		// 	html: 	`<div>
-		// 				<img src="https://i.imgur.com/9CSWeNf.gif" alt="imgur gif" />
-		// 				<a href='${verificationUrl}'>Verify your email.</a>
-		// 			</div>`
-		// };
+			from: "Chordeographer <chordeographer.official@gmail.com>",
+			to: email,
+			subject: "Verify your email.",
+			text: `Verify your email: ${verificationUrl}`,
+			html: 	`<div>
+						<img src="https://i.imgur.com/9CSWeNf.gif" alt="imgur gif" />
+						<a href='${verificationUrl}'>Verify your email.</a>
+					</div>`
+		};
 
-		// const result = await transporter.sendMail(mailOptions);
-		// if (!result) return res.status(500).json({ message: "Could not send verification email to user." });
-		return res.status(200).json({ result, message: "Successfully signed up." });
+		const result = await transporter.sendMail(mailOptions);
+		if (!result) return res.status(500).json({ message: "Could not send verification email to user." });
+		return res.status(200).json({ result, message: "Successfully signed up. Verify your email before logging in." });
 
 	} catch (error) {
 
@@ -62,14 +56,12 @@ export const signin = async (req, res) => {
 	try {
 
 		const { email, password } = req.body;
-
-		console.log('email: ', email)
 		
 		const user = await UserModal.findOne({ email });
 		if (!user) return res.status(400).json({ message: "Email does not belong to an existing user." });
 		
-		// const isPasswordCorrect = await bcrypt.compare(password, user.password);
-		if (password !== user.password ) return res.status(401).json({ message: "Invalid credentials." });
+		const isPasswordCorrect = await bcrypt.compare(password, user.password);
+		if (!isPasswordCorrect) return res.status(401).json({ message: "Invalid credentials." });
 
 		// if (!user.isVerified) return res.status(403).json({ message: "User has not verified their email." });
 		// await SessionModal.findByIdAndDelete(user._id);
@@ -83,8 +75,6 @@ export const signin = async (req, res) => {
 		// await UserModal.findByIdAndUpdate(user._id, { lastLogin: Date.now() });
 
 		// return res.status(200).json({ authToken });
-
-		return res.status(200).json({ message: "You are now logged in!" })
 
 	} catch (error) {
 
