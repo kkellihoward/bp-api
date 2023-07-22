@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import router from './API/routes/users.js';
+import userRoutes from './server/routes/users.js';
 
 const app = express();
 app.use(cors());
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 	res.send('Yay');
 });
 
-app.use('/user', router);
+app.use('/user', userRoutes);
 
 dotenv.config();
 
