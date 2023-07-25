@@ -10,53 +10,17 @@ import { getTransporter } from "../other/mail.js";
 
 dotenv.config();
 
-export const signup = async (req, res) => {
+export const createAccount = async (req, res) => {
+    const {username, password} = req.body;
 
-	try {
-
-		const { email, password } = req.body;
-
-		    // add doc to db
-		        const user = await UserModal.create({ email, password });
-		        res.status(200).json(user);
-
-		// return res.status(200).json({ message: "Email: " + email + ", password: " + password});
-		
-		// const user = await UserModal.findOne({ email });
-		// if (user) return res.status(400).json({ message: "Email already belongs to an existing user." });
-
-		// // const hashedPassword = await bcrypt.hash(password, 11);
-		// const newUser = await UserModal.create({ email, password });
-		// if (!newUser) return res.status(500).json({ message: "User could not be added to database." });
-
-		// const verificationToken = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "2h" });
-		// const verificationUrl = `${process.env.BASE_URL}/user/verify-email/${verificationToken}`;
-
-		// const transporter = await getTransporter();
-		// if (!transporter) return res.status(500).json({ message: "Could not create email transporter." });
-		// const mailOptions = {
-
-		// 	from: "Chordeographer <chordeographer.official@gmail.com>",
-		// 	to: email,
-		// 	subject: "Verify your email.",
-		// 	text: `Verify your email: ${verificationUrl}`,
-		// 	html: 	`<div>
-		// 				<img src="https://i.imgur.com/9CSWeNf.gif" alt="imgur gif" />
-		// 				<a href='${verificationUrl}'>Verify your email.</a>
-		// 			</div>`
-		// };
-
-		// const result = await transporter.sendMail(mailOptions);
-		// if (!result) return res.status(500).json({ message: "Could not send verification email to user." });
-		return res.status(200).json({ result, message: "Successfully signed up." });
-
-	} catch (error) {
-
-		console.log("Internal server error during sign up:", error.message);
-		return res.status(500).json({ message: "Internal server error: " + error.message });
-	}
+    // add doc to db
+    try {
+        const account = await Account.create({username, password});
+        res.status(200).json(account);
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
 };
-
 export const signin = async (req, res) => {
 
 	try {
