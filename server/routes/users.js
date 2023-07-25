@@ -3,7 +3,7 @@ import express from 'express';
 import { authenticate, finish } from '../middleware/auth.js';
 
 import {
-	signup,
+	createAccount,
 	signin,
 	signout,
 	verifyEmail,
@@ -16,7 +16,7 @@ const router = express.Router();
 
 router.post('/validate-access', authenticate, finish);
 
-router.post('/signup', signup);
+router.post('/createAccount', createAccount);
 router.post('/signin', signin);
 router.post('/signout', signout);
 router.post('/verify-email', verifyEmail);
