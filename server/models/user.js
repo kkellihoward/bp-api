@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 
 const userSchema = mongoose.Schema({
-
-    email: {
+    	email: {
 		type: String,
 		unique: true,
 		required: true,
@@ -19,10 +18,18 @@ const userSchema = mongoose.Schema({
 		type: Boolean,
 		default: false,
 	},
-    lastLogin: {
+        lastLogin: {
 		type: Date,
 		default: Date.now(),
-	}
+	},
+    	hosted_event_ids: [{
+        	type: String,
+        	required: false
+    	}],
+    	invited_event_ids: [{
+        	type: String,
+        	required: false
+    	}]
 });
 
 export default mongoose.model('Users', userSchema);
