@@ -15,10 +15,6 @@ const eventSchema = new Schema({
         type: String,
         required: false
     },
-    invitee_ids: [{
-        type: String,
-        required: false
-    }],
     date: {
         type: Date,
         required: false
