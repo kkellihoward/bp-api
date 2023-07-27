@@ -11,14 +11,23 @@ import { getTransporter } from "../other/mail.js";
 dotenv.config();
 
 export const createAccount = async (req, res) => {
-    const {username, password} = req.body;
+    const {email, password} = req.body;
 
-    // add doc to db
-    try {
-        const account = await Account.create({username, password});
-        res.status(200).json(account);
-    } catch (error) {
-        res.status(400).json({error: error.message});
+    const temp = await UserModal.findOne({email: email});
+
+    if (temp)
+    {
+        res.status(400).json({error: "Account already exists"});
+    }
+    else
+    {
+	    // add doc to db
+	    try {
+	        const newUser = await UserModal.create({email, password});
+	        res.status(200).json(newUser);
+	    } catch (error) {
+	        res.status(400).json({error: error.message});
+	    }
     }
 };
 export const signin = async (req, res) => {
