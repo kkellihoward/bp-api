@@ -45,3 +45,29 @@ export const signin = async (req, res) => {
 		return res.status(500).json({ message: "Internal server error: " + error.message });
 	}
 };
+
+// get all accounts
+export const getAccounts = async (req, res) => {
+    const account = await Account.find({}).sort({createdAt: -1});
+
+    res.status(200).json(account);
+}
+
+// update an account
+export const updateAccount = async (req, res) => {
+    const {id} = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'Account does not exist'});
+    }
+
+    const account = await Account.findOneAndUpdate({_id: id}, {
+        ...req.body
+    });
+
+    if (!account) {
+        return res.status(404).json({error: 'Account does not exist'});
+    }
+
+    res.status(200).json(account);
+}
