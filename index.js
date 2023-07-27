@@ -19,6 +19,20 @@ app.get('/', (req, res) => {
 	res.send('Yay');
 });
 
+app.use((req, res, next) => 
+{
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader(
+	'Access-Control-Allow-Headers',
+	'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+	);
+	res.setHeader(
+	'Access-Control-Allow-Methods',
+	'GET, POST, PATCH, DELETE, OPTIONS'
+	);
+	next();
+});
+
 // routing to other API functions
 app.use('/user', userRoutes);
 app.use('/event', eventRoutes);
