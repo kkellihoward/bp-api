@@ -1,7 +1,5 @@
 import express from 'express';
 
-import { authenticate, finish } from '../middleware/auth.js';
-
 import {
 	createAccount,
 	signin,
