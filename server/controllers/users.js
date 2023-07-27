@@ -11,7 +11,7 @@ import { getTransporter } from "../other/mail.js";
 dotenv.config();
 
 export const createAccount = async (req, res) => {
-    const {email, password} = req.body;
+    const {email, username, password} = req.body;
 
     const temp = await UserModal.findOne({email: email});
 
@@ -23,7 +23,7 @@ export const createAccount = async (req, res) => {
     {
 	    // add doc to db
 	    try {
-	        const newUser = await UserModal.create({email, password});
+	        const newUser = await UserModal.create({email, username, password});
 	        res.status(200).json(newUser);
 	    } catch (error) {
 	        res.status(400).json({error: error.message});
