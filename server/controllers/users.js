@@ -1,12 +1,4 @@
 import dotenv from "dotenv";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-
-import UserModal from "../models/user.js";
-import SessionModal from "../models/session.js";
-
-import { generateToken } from "../other/token.js";
-import { getTransporter } from "../other/mail.js";
 
 dotenv.config();
 
