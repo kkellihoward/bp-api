@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import userRoutes from './server/routes/users.js';
+import eventRoutes from './server/routes/events.js';
 
 const app = express();
 app.use(cors());
@@ -13,19 +14,19 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-// app.use('/user/signin', (req, res) => {
-// 	const { email, password } = req.body;
-// 	res.status(200).send({message: "I recieved an API call " + email + ' ' + password})
-// });
-
+// an initial gateway
 app.get('/', (req, res) => {
 	res.send('Yay');
 });
 
+// routing to other API functions
 app.use('/user', userRoutes);
+app.use('/event', eventRoutes);
 
+// pulling environment variables from heroku
 dotenv.config();
 
+// connecting to the database
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
 	.then(() => {
 		// listen for requests
