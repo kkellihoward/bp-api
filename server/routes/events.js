@@ -10,18 +10,18 @@ import {
 const eventRoutes = express.Router();
 
 // GET all events
-eventRoutes.get('/', getEvents);
+eventRoutes.get('/getEvents', getEvents);
 
 // GET a single event
-eventRoutes.get('/:id', getEvent);
+eventRoutes.get('/getEvent/:id', getEvent);
 
 // POST a new event
-eventRoutes.post('/', createEvent);
+eventRoutes.post('/createEvent', createEvent);
 
 // DELETE an event
-eventRoutes.delete('/:id', deleteEvent);
+eventRoutes.delete('/deleteEvent/:id', deleteEvent);
 
 // UPDATE an event
-eventRoutes.patch('/:id', updateEvent);
+eventRoutes.patch('/updateEvent/:id', updateEvent);
 
 export default eventRoutes;
