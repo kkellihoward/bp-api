@@ -13,15 +13,15 @@ const eventSchema = new Schema({
     },
     host_id: {
         type: String,
-        required: true
+        required: false
     },
     invitee_ids: [{
         type: String,
-        required: true
+        required: false
     }],
     date: {
         type: Date,
-        required: true
+        required: false
     }
 }, {timestamps: true});
 
