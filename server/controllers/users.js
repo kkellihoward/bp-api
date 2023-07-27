@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import UserModal from "../models/user.js";
 
 dotenv.config();
 
