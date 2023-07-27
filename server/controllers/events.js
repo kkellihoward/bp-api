@@ -27,7 +27,7 @@ export const getEvent = async (req, res) => {
 
 // create a new event
 export const createEvent = async (req, res) => {
-    const {title, description, host_id, invitee_ids, date} = req.body;
+    const {title, description, host_id, date} = req.body;
 
     const temp = await Event.findOne({title: title});
 
@@ -39,7 +39,7 @@ export const createEvent = async (req, res) => {
     {
         // add doc to db
         try {
-            const event = await Event.create({title, description, host_id, invitee_ids, date});
+            const event = await Event.create({title, description, host_id, date});
             res.status(200).json(event);
 
         } catch (error) {
