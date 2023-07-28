@@ -25,10 +25,6 @@ const userSchema = mongoose.Schema({
     	hosted_event_ids: [{
         	type: String,
         	required: false
-    	}],
-    	invited_event_ids: [{
-        	type: String,
-        	required: false
     	}]
 });
 
