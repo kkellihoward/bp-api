@@ -13,6 +13,6 @@ router.post('/createAccount', createAccount);
 router.post('/signin', signin);
 
 router.get('/getAccounts', getAccounts);
-router.get('/updateAccount', updateAccount);
+router.patch('/updateAccount', updateAccount);
 
 export default router;
