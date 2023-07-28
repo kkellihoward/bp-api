@@ -51,7 +51,7 @@ export const getAccounts = async (req, res) => {
     const account = await Account.find({}).sort({createdAt: -1});
 
     res.status(200).json(account);
-}
+};
 
 // update an account
 export const updateAccount = async (req, res) => {
@@ -70,4 +70,4 @@ export const updateAccount = async (req, res) => {
     }
 
     res.status(200).json(account);
-}
+};
