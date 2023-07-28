@@ -48,7 +48,7 @@ export const signin = async (req, res) => {
 
 // get all accounts
 export const getAccounts = async (req, res) => {
-    const account = await Account.find({}).sort({createdAt: -1});
+    const account = await UserModal.find({}).sort({createdAt: -1});
 
     res.status(200).json(account);
 };
@@ -61,7 +61,7 @@ export const updateAccount = async (req, res) => {
         return res.status(404).json({error: 'Account does not exist'});
     }
 
-    const account = await Account.findOneAndUpdate({_id: id}, {
+    const account = await UserModal.findOneAndUpdate({_id: id}, {
         ...req.body
     });
 
