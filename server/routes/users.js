@@ -3,7 +3,7 @@ import express from 'express';
 import {
 	createAccount,
 	signin,
-	getAccount,
+	getAccounts,
 	updateAccount
 } from '../controllers/users.js';
 
@@ -12,7 +12,7 @@ const router = express.Router();
 router.post('/createAccount', createAccount);
 router.post('/signin', signin);
 
-router.get('/getAccount', getAccount);
+router.get('/getAccounts', getAccounts);
 router.get('/updateAccount', updateAccount);
 
 export default router;
