@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import UserModal from "../models/user.js";
+import mongoose from 'mongoose';
 
 dotenv.config();
 
