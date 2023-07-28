@@ -15,6 +15,10 @@ const eventSchema = new Schema({
         type: String,
         required: false
     },
+    hosted_events: [{
+        	type: String,
+        	required: false
+    	}],
     date: {
         type: Date,
         required: false
