@@ -15,7 +15,7 @@ const eventSchema = new Schema({
         type: String,
         required: false
     },
-    hosted_events: [{
+    invitees: [{
         	type: String,
         	required: false
     	}],
