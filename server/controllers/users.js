@@ -38,7 +38,7 @@ export const signin = async (req, res) => {
 		// const isPasswordCorrect = await bcrypt.compare(password, user.password);
 		if (password !== user.password ) return res.status(401).json({ message: "Invalid credentials." });
 
-		return res.status(200).json({ message: "You are now logged in!" })
+		return res.status(200).json(user.username);
 
 	} catch (error) {
 
