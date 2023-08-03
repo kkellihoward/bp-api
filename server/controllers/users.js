@@ -100,6 +100,9 @@ export const updateAccount = async (req, res) => {
 
 export const verifyEmail = async (req, res) => {
 
+	console.log("in verify")
+	console.log(req.query)
+
 	try {
 
 		const { verificationToken } = req.query;
