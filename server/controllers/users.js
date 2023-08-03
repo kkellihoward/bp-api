@@ -102,7 +102,7 @@ export const verifyEmail = async (req, res) => {
 
 	try {
 
-		const { verificationToken } = req.body;
+		const { verificationToken } = req.query;
 
 		const payload = jwt.verify(verificationToken, process.env.JWT_SECRET);
 		if (!payload.email) return res.status(401).json({ message: "Invalid verification token." });
