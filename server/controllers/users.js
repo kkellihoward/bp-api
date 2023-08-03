@@ -101,7 +101,8 @@ export const updateAccount = async (req, res) => {
 export const verifyEmail = async (req, res) => {
 
 	console.log("in verify")
-	// console.log(req.body)
+	console.log(req.body)
+	console.log(req.body['verificationToken'])
 
 	try {
 
