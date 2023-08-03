@@ -1,26 +1,15 @@
-import dotenv from "dotenv";
 import nodemailer from "nodemailer";
-import { google } from "googleapis";
-
-dotenv.config();
-
-const oAuth2Client = new google.auth.OAuth2(process.env.CLIENT_ID, process.env.CLIENT_SECRET, process.env.REDIRECT_URI);
-oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
 
 export async function getTransporter() {
-
 	try {
-
-		const accessToken = await oAuth2Client.getAccessToken();
 		const transporter = nodemailer.createTransport({
-			service: "gmail",
+			host: 'smtp.gmail.com',
+   			port: 465,
+    			secure: true,
 			auth: {
-				type: "OAuth2",
-				user: process.env.EMAIL,
-				clientId: process.env.CLIENT_ID,
-				clientSecret: process.env.CLIENT_SECRET,
-				refreshToken: process.env.REFRESH_TOKEN,
-				accessToken: accessToken
+				
+				user: 'bigproject4331@gmail.com',
+				pass: 'ekxtljcqxenjeajx'
 			}
 		});
 		
