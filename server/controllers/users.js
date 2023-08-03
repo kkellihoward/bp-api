@@ -101,11 +101,13 @@ export const updateAccount = async (req, res) => {
 export const verifyEmail = async (req, res) => {
 
 	console.log("in verify")
-	console.log(req.body)
+	// console.log(req.body)
 
 	try {
 
 		const { verificationToken } = req.body;
+		console.log("verify token is:")
+		console.log(verificationToken)
 
 		const payload = jwt.verify(verificationToken, process.env.JWT_SECRET);
 		if (!payload.email) return res.status(401).json({ message: "Invalid verification token." });
