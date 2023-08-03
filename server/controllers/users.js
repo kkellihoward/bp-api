@@ -44,7 +44,7 @@ export const createAccount = async (req, res) => {
 		if (!result) return res.status(500).json({ message: "Could not send verification email to user." });
 		return res.status(200).json({ result, message: "Successfully signed up. Verify your email before logging in." });
 	    } catch (error) {
-	        res.status(400).json({error: error.message});
+	        res.status(400).json({message: error.message});
 	    }
     }
 };
